@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: SqlServer
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://123.249.30.87:3306/sql_server
+    username: cx
+    password: 111111
+mybatis:
+  mapper-locations: classpath:com/shiaofuk/*.xml       # Mapper XML 文件的位置
+  configuration:
+    map-underscore-to-camel-case: true
+server:
+  address: 0.0.0.0
+  port: 80
