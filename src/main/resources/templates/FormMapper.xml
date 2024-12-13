@@ -4,35 +4,31 @@
   <resultMap id="BaseResultMap" type="com.shiaofuk.sqlserver.model.Form">
     <!--@mbg.generated-->
     <!--@Table form-->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="thing_id" jdbcType="INTEGER" property="thingId" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="state" jdbcType="INTEGER" property="state" />
-    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
-    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <id column="id" property="id" />
+    <result column="thing_id" property="thingId" />
+    <result column="user_id" property="userId" />
+    <result column="state" property="state" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, thing_id, user_id, `state`, created_time, updated_time
+    id, thing_id, user_id, `state`
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
     from form
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from form
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.Form" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into form (thing_id, user_id, `state`, 
-      created_time, updated_time)
-    values (#{thingId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, 
-      #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP})
+    insert into form (thing_id, user_id, `state`)
+    values (#{thingId}, #{userId}, #{state})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.Form" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -47,28 +43,16 @@
       <if test="state != null">
         `state`,
       </if>
-      <if test="createdTime != null">
-        created_time,
-      </if>
-      <if test="updatedTime != null">
-        updated_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="thingId != null">
-        #{thingId,jdbcType=INTEGER},
+        #{thingId},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+        #{userId},
       </if>
       <if test="state != null">
-        #{state,jdbcType=INTEGER},
-      </if>
-      <if test="createdTime != null">
-        #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedTime != null">
-        #{updatedTime,jdbcType=TIMESTAMP},
+        #{state},
       </if>
     </trim>
   </insert>
@@ -77,31 +61,23 @@
     update form
     <set>
       <if test="thingId != null">
-        thing_id = #{thingId,jdbcType=INTEGER},
+        thing_id = #{thingId},
       </if>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
+        user_id = #{userId},
       </if>
       <if test="state != null">
-        `state` = #{state,jdbcType=INTEGER},
-      </if>
-      <if test="createdTime != null">
-        created_time = #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedTime != null">
-        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+        `state` = #{state},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.shiaofuk.sqlserver.model.Form">
     <!--@mbg.generated-->
     update form
-    set thing_id = #{thingId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
-      `state` = #{state,jdbcType=INTEGER},
-      created_time = #{createdTime,jdbcType=TIMESTAMP},
-      updated_time = #{updatedTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+    set thing_id = #{thingId},
+      user_id = #{userId},
+      `state` = #{state}
+    where id = #{id}
   </update>
 </mapper>

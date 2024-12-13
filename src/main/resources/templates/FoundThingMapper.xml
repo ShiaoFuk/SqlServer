@@ -4,33 +4,30 @@
   <resultMap id="BaseResultMap" type="com.shiaofuk.sqlserver.model.FoundThing">
     <!--@mbg.generated-->
     <!--@Table found_thing-->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="thing_id" jdbcType="INTEGER" property="thingId" />
-    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
-    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <id column="id" property="id" />
+    <result column="thing_id" property="thingId" />
+    <result column="state" property="state" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, thing_id, created_time, updated_time
+    id, thing_id, `state`
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
     from found_thing
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from found_thing
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.FoundThing" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into found_thing (thing_id, created_time, updated_time
-      )
-    values (#{thingId,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}
-      )
+    insert into found_thing (thing_id, `state`)
+    values (#{thingId}, #{state})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.FoundThing" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -39,22 +36,16 @@
       <if test="thingId != null">
         thing_id,
       </if>
-      <if test="createdTime != null">
-        created_time,
-      </if>
-      <if test="updatedTime != null">
-        updated_time,
+      <if test="state != null">
+        `state`,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="thingId != null">
-        #{thingId,jdbcType=INTEGER},
+        #{thingId},
       </if>
-      <if test="createdTime != null">
-        #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedTime != null">
-        #{updatedTime,jdbcType=TIMESTAMP},
+      <if test="state != null">
+        #{state},
       </if>
     </trim>
   </insert>
@@ -63,23 +54,19 @@
     update found_thing
     <set>
       <if test="thingId != null">
-        thing_id = #{thingId,jdbcType=INTEGER},
+        thing_id = #{thingId},
       </if>
-      <if test="createdTime != null">
-        created_time = #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedTime != null">
-        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      <if test="state != null">
+        `state` = #{state},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.shiaofuk.sqlserver.model.FoundThing">
     <!--@mbg.generated-->
     update found_thing
-    set thing_id = #{thingId,jdbcType=INTEGER},
-      created_time = #{createdTime,jdbcType=TIMESTAMP},
-      updated_time = #{updatedTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+    set thing_id = #{thingId},
+      `state` = #{state}
+    where id = #{id}
   </update>
 </mapper>

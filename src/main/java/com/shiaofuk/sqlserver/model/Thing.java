@@ -1,5 +1,8 @@
 package com.shiaofuk.sqlserver.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,17 +12,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Thing {
+    @NotNull(message = "不能为null")
     private Integer id;
 
+    @Size(max = 20, message = "最大长度要小于 20")
+    @NotBlank(message = "不能为空")
     private String name;
 
     private String description;
 
+    @Size(max = 50, message = "最大长度要小于 50")
+    @NotBlank(message = "不能为空")
     private String place;
 
+    @NotNull(message = "不能为null")
     private Date time;
-
-    private Date createdTime;
-
-    private Date updatedTime;
 }

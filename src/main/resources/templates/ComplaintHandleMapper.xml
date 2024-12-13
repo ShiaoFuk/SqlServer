@@ -4,35 +4,31 @@
   <resultMap id="BaseResultMap" type="com.shiaofuk.sqlserver.model.ComplaintHandle">
     <!--@mbg.generated-->
     <!--@Table complaint_handle-->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="complaint_id" jdbcType="INTEGER" property="complaintId" />
-    <result column="manager_id" jdbcType="INTEGER" property="managerId" />
-    <result column="handle_result" jdbcType="LONGVARCHAR" property="handleResult" />
-    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
-    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <id column="id" property="id" />
+    <result column="complaint_id" property="complaintId" />
+    <result column="manager_id" property="managerId" />
+    <result column="handle_result" property="handleResult" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, complaint_id, manager_id, handle_result, created_time, updated_time
+    id, complaint_id, manager_id, handle_result
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
     from complaint_handle
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from complaint_handle
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.ComplaintHandle" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into complaint_handle (complaint_id, manager_id, handle_result, 
-      created_time, updated_time)
-    values (#{complaintId,jdbcType=INTEGER}, #{managerId,jdbcType=INTEGER}, #{handleResult,jdbcType=LONGVARCHAR}, 
-      #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP})
+    insert into complaint_handle (complaint_id, manager_id, handle_result)
+    values (#{complaintId}, #{managerId}, #{handleResult})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.ComplaintHandle" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -47,28 +43,16 @@
       <if test="handleResult != null">
         handle_result,
       </if>
-      <if test="createdTime != null">
-        created_time,
-      </if>
-      <if test="updatedTime != null">
-        updated_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="complaintId != null">
-        #{complaintId,jdbcType=INTEGER},
+        #{complaintId},
       </if>
       <if test="managerId != null">
-        #{managerId,jdbcType=INTEGER},
+        #{managerId},
       </if>
       <if test="handleResult != null">
-        #{handleResult,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="createdTime != null">
-        #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedTime != null">
-        #{updatedTime,jdbcType=TIMESTAMP},
+        #{handleResult},
       </if>
     </trim>
   </insert>
@@ -77,31 +61,23 @@
     update complaint_handle
     <set>
       <if test="complaintId != null">
-        complaint_id = #{complaintId,jdbcType=INTEGER},
+        complaint_id = #{complaintId},
       </if>
       <if test="managerId != null">
-        manager_id = #{managerId,jdbcType=INTEGER},
+        manager_id = #{managerId},
       </if>
       <if test="handleResult != null">
-        handle_result = #{handleResult,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="createdTime != null">
-        created_time = #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedTime != null">
-        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+        handle_result = #{handleResult},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.shiaofuk.sqlserver.model.ComplaintHandle">
     <!--@mbg.generated-->
     update complaint_handle
-    set complaint_id = #{complaintId,jdbcType=INTEGER},
-      manager_id = #{managerId,jdbcType=INTEGER},
-      handle_result = #{handleResult,jdbcType=LONGVARCHAR},
-      created_time = #{createdTime,jdbcType=TIMESTAMP},
-      updated_time = #{updatedTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+    set complaint_id = #{complaintId},
+      manager_id = #{managerId},
+      handle_result = #{handleResult}
+    where id = #{id}
   </update>
 </mapper>

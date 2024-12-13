@@ -2,6 +2,7 @@ package com.shiaofuk.sqlserver.mapper;
 
 import com.shiaofuk.sqlserver.model.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserMapper {
@@ -16,4 +17,9 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+
+    User selectOneIdAndPasswordByUsername(@Param("username")String username);
+
+
 }

@@ -4,41 +4,36 @@
   <resultMap id="BaseResultMap" type="com.shiaofuk.sqlserver.model.User">
     <!--@mbg.generated-->
     <!--@Table `user`-->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="certificate_number" jdbcType="VARCHAR" property="certificateNumber" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="permission" jdbcType="INTEGER" property="permission" />
-    <result column="state" jdbcType="INTEGER" property="state" />
-    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
-    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <id column="id" property="id" />
+    <result column="certificate_number" property="certificateNumber" />
+    <result column="username" property="username" />
+    <result column="email" property="email" />
+    <result column="password" property="password" />
+    <result column="permission" property="permission" />
+    <result column="state" property="state" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, certificate_number, username, email, `password`, permission, `state`, created_time, 
-    updated_time
+    id, certificate_number, username, email, `password`, permission, `state`
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
     from `user`
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from `user`
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.User" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into `user` (certificate_number, username, email, 
-      `password`, permission, `state`, 
-      created_time, updated_time)
-    values (#{certificateNumber,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{permission,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, 
-      #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP})
+    insert into `user` (certificate_number, username, email, `password`, permission, 
+      `state`)
+    values (#{certificateNumber}, #{username}, #{email}, #{password}, #{permission}, 
+      #{state})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.User" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -62,37 +57,25 @@
       <if test="state != null">
         `state`,
       </if>
-      <if test="createdTime != null">
-        created_time,
-      </if>
-      <if test="updatedTime != null">
-        updated_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="certificateNumber != null">
-        #{certificateNumber,jdbcType=VARCHAR},
+        #{certificateNumber},
       </if>
       <if test="username != null">
-        #{username,jdbcType=VARCHAR},
+        #{username},
       </if>
       <if test="email != null">
-        #{email,jdbcType=VARCHAR},
+        #{email},
       </if>
       <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+        #{password},
       </if>
       <if test="permission != null">
-        #{permission,jdbcType=INTEGER},
+        #{permission},
       </if>
       <if test="state != null">
-        #{state,jdbcType=INTEGER},
-      </if>
-      <if test="createdTime != null">
-        #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedTime != null">
-        #{updatedTime,jdbcType=TIMESTAMP},
+        #{state},
       </if>
     </trim>
   </insert>
@@ -101,43 +84,43 @@
     update `user`
     <set>
       <if test="certificateNumber != null">
-        certificate_number = #{certificateNumber,jdbcType=VARCHAR},
+        certificate_number = #{certificateNumber},
       </if>
       <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
+        username = #{username},
       </if>
       <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
+        email = #{email},
       </if>
       <if test="password != null">
-        `password` = #{password,jdbcType=VARCHAR},
+        `password` = #{password},
       </if>
       <if test="permission != null">
-        permission = #{permission,jdbcType=INTEGER},
+        permission = #{permission},
       </if>
       <if test="state != null">
-        `state` = #{state,jdbcType=INTEGER},
-      </if>
-      <if test="createdTime != null">
-        created_time = #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedTime != null">
-        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+        `state` = #{state},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.shiaofuk.sqlserver.model.User">
     <!--@mbg.generated-->
     update `user`
-    set certificate_number = #{certificateNumber,jdbcType=VARCHAR},
-      username = #{username,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      `password` = #{password,jdbcType=VARCHAR},
-      permission = #{permission,jdbcType=INTEGER},
-      `state` = #{state,jdbcType=INTEGER},
-      created_time = #{createdTime,jdbcType=TIMESTAMP},
-      updated_time = #{updatedTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+    set certificate_number = #{certificateNumber},
+      username = #{username},
+      email = #{email},
+      `password` = #{password},
+      permission = #{permission},
+      `state` = #{state}
+    where id = #{id}
   </update>
+
+
+<!--auto generated by MybatisCodeHelper on 2024-12-13-->
+  <select id="selectOneIdAndPasswordByUsername" resultMap="BaseResultMap">
+    select id, `password`
+    from `user`
+    where username=#{username}
+  </select>
 </mapper>

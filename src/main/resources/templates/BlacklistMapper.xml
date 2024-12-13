@@ -4,34 +4,30 @@
   <resultMap id="BaseResultMap" type="com.shiaofuk.sqlserver.model.Blacklist">
     <!--@mbg.generated-->
     <!--@Table blacklist-->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="bad_count" jdbcType="INTEGER" property="badCount" />
-    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
-    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <id column="id" property="id" />
+    <result column="user_id" property="userId" />
+    <result column="bad_count" property="badCount" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, user_id, bad_count, created_time, updated_time
+    id, user_id, bad_count
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
     from blacklist
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from blacklist
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.Blacklist" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into blacklist (user_id, bad_count, created_time, 
-      updated_time)
-    values (#{userId,jdbcType=INTEGER}, #{badCount,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, 
-      #{updatedTime,jdbcType=TIMESTAMP})
+    insert into blacklist (user_id, bad_count)
+    values (#{userId}, #{badCount})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.Blacklist" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -43,25 +39,13 @@
       <if test="badCount != null">
         bad_count,
       </if>
-      <if test="createdTime != null">
-        created_time,
-      </if>
-      <if test="updatedTime != null">
-        updated_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+        #{userId},
       </if>
       <if test="badCount != null">
-        #{badCount,jdbcType=INTEGER},
-      </if>
-      <if test="createdTime != null">
-        #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedTime != null">
-        #{updatedTime,jdbcType=TIMESTAMP},
+        #{badCount},
       </if>
     </trim>
   </insert>
@@ -70,27 +54,19 @@
     update blacklist
     <set>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
+        user_id = #{userId},
       </if>
       <if test="badCount != null">
-        bad_count = #{badCount,jdbcType=INTEGER},
-      </if>
-      <if test="createdTime != null">
-        created_time = #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedTime != null">
-        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+        bad_count = #{badCount},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.shiaofuk.sqlserver.model.Blacklist">
     <!--@mbg.generated-->
     update blacklist
-    set user_id = #{userId,jdbcType=INTEGER},
-      bad_count = #{badCount,jdbcType=INTEGER},
-      created_time = #{createdTime,jdbcType=TIMESTAMP},
-      updated_time = #{updatedTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+    set user_id = #{userId},
+      bad_count = #{badCount}
+    where id = #{id}
   </update>
 </mapper>

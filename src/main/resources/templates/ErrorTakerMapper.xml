@@ -4,34 +4,30 @@
   <resultMap id="BaseResultMap" type="com.shiaofuk.sqlserver.model.ErrorTaker">
     <!--@mbg.generated-->
     <!--@Table error_taker-->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="form_id" jdbcType="INTEGER" property="formId" />
-    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
-    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <id column="id" property="id" />
+    <result column="user_id" property="userId" />
+    <result column="form_id" property="formId" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, user_id, form_id, created_time, updated_time
+    id, user_id, form_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
     from error_taker
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from error_taker
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.ErrorTaker" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into error_taker (user_id, form_id, created_time, 
-      updated_time)
-    values (#{userId,jdbcType=INTEGER}, #{formId,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, 
-      #{updatedTime,jdbcType=TIMESTAMP})
+    insert into error_taker (user_id, form_id)
+    values (#{userId}, #{formId})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.ErrorTaker" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -43,25 +39,13 @@
       <if test="formId != null">
         form_id,
       </if>
-      <if test="createdTime != null">
-        created_time,
-      </if>
-      <if test="updatedTime != null">
-        updated_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+        #{userId},
       </if>
       <if test="formId != null">
-        #{formId,jdbcType=INTEGER},
-      </if>
-      <if test="createdTime != null">
-        #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedTime != null">
-        #{updatedTime,jdbcType=TIMESTAMP},
+        #{formId},
       </if>
     </trim>
   </insert>
@@ -70,27 +54,19 @@
     update error_taker
     <set>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
+        user_id = #{userId},
       </if>
       <if test="formId != null">
-        form_id = #{formId,jdbcType=INTEGER},
-      </if>
-      <if test="createdTime != null">
-        created_time = #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedTime != null">
-        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+        form_id = #{formId},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.shiaofuk.sqlserver.model.ErrorTaker">
     <!--@mbg.generated-->
     update error_taker
-    set user_id = #{userId,jdbcType=INTEGER},
-      form_id = #{formId,jdbcType=INTEGER},
-      created_time = #{createdTime,jdbcType=TIMESTAMP},
-      updated_time = #{updatedTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+    set user_id = #{userId},
+      form_id = #{formId}
+    where id = #{id}
   </update>
 </mapper>

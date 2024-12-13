@@ -1,6 +1,6 @@
 package com.shiaofuk.sqlserver.model;
 
-import java.util.Date;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,11 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LostThing {
+    @NotNull(message = "不能为null")
     private Integer id;
 
+    @NotNull(message = "不能为null")
     private Integer thingId;
 
-    private Date createdTime;
-
-    private Date updatedTime;
+    @NotNull(message = "不能为null")
+    private Integer state;
 }

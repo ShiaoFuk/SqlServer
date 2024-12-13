@@ -4,38 +4,32 @@
   <resultMap id="BaseResultMap" type="com.shiaofuk.sqlserver.model.Thing">
     <!--@mbg.generated-->
     <!--@Table thing-->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="description" jdbcType="LONGVARCHAR" property="description" />
-    <result column="place" jdbcType="VARCHAR" property="place" />
-    <result column="time" jdbcType="TIMESTAMP" property="time" />
-    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
-    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <id column="id" property="id" />
+    <result column="name" property="name" />
+    <result column="description" property="description" />
+    <result column="place" property="place" />
+    <result column="time" property="time" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, `name`, description, place, `time`, created_time, updated_time
+    id, `name`, description, place, `time`
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
     from thing
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from thing
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.Thing" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into thing (`name`, description, place, 
-      `time`, created_time, updated_time
-      )
-    values (#{name,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR}, #{place,jdbcType=VARCHAR}, 
-      #{time,jdbcType=TIMESTAMP}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}
-      )
+    insert into thing (`name`, description, place, `time`)
+    values (#{name}, #{description}, #{place}, #{time})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.Thing" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -53,31 +47,19 @@
       <if test="time != null">
         `time`,
       </if>
-      <if test="createdTime != null">
-        created_time,
-      </if>
-      <if test="updatedTime != null">
-        updated_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+        #{name},
       </if>
       <if test="description != null">
-        #{description,jdbcType=LONGVARCHAR},
+        #{description},
       </if>
       <if test="place != null">
-        #{place,jdbcType=VARCHAR},
+        #{place},
       </if>
       <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createdTime != null">
-        #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedTime != null">
-        #{updatedTime,jdbcType=TIMESTAMP},
+        #{time},
       </if>
     </trim>
   </insert>
@@ -86,35 +68,27 @@
     update thing
     <set>
       <if test="name != null">
-        `name` = #{name,jdbcType=VARCHAR},
+        `name` = #{name},
       </if>
       <if test="description != null">
-        description = #{description,jdbcType=LONGVARCHAR},
+        description = #{description},
       </if>
       <if test="place != null">
-        place = #{place,jdbcType=VARCHAR},
+        place = #{place},
       </if>
       <if test="time != null">
-        `time` = #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createdTime != null">
-        created_time = #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedTime != null">
-        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+        `time` = #{time},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.shiaofuk.sqlserver.model.Thing">
     <!--@mbg.generated-->
     update thing
-    set `name` = #{name,jdbcType=VARCHAR},
-      description = #{description,jdbcType=LONGVARCHAR},
-      place = #{place,jdbcType=VARCHAR},
-      `time` = #{time,jdbcType=TIMESTAMP},
-      created_time = #{createdTime,jdbcType=TIMESTAMP},
-      updated_time = #{updatedTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+    set `name` = #{name},
+      description = #{description},
+      place = #{place},
+      `time` = #{time}
+    where id = #{id}
   </update>
 </mapper>
