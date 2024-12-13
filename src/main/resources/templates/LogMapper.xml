@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiaofuk.sqlserver.mapper.LogMapper">
+  <resultMap id="BaseResultMap" type="com.shiaofuk.sqlserver.model.Log">
+    <!--@mbg.generated-->
+    <!--@Table log-->
+    <id column="id" property="id" />
+    <result column="name" property="name" />
+    <result column="content" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from log
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from log
+    where id = #{id}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.Log" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into log (`name`, content)
+    values (#{name}, #{content})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.Log" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name},
+      </if>
+      <if test="content != null">
+        #{content},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shiaofuk.sqlserver.model.Log">
+    <!--@mbg.generated-->
+    update log
+    <set>
+      <if test="name != null">
+        `name` = #{name},
+      </if>
+      <if test="content != null">
+        content = #{content},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shiaofuk.sqlserver.model.Log">
+    <!--@mbg.generated-->
+    update log
+    set `name` = #{name},
+      content = #{content}
+    where id = #{id}
+  </update>
+</mapper>
