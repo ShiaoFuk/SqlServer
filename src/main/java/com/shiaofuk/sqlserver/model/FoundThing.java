@@ -17,4 +17,7 @@ public class FoundThing {
 
     @NotNull(message = "不能为null")
     private Integer state;
+
+    @NotNull(message = "不能为null")
+    private Integer userId;
 }

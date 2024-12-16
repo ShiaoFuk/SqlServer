@@ -2,6 +2,9 @@ package com.shiaofuk.sqlserver.mapper;
 
 import com.shiaofuk.sqlserver.model.LostThing;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface LostThingMapper {
@@ -16,4 +19,9 @@ public interface LostThingMapper {
     int updateByPrimaryKeySelective(LostThing record);
 
     int updateByPrimaryKey(LostThing record);
+
+    int updateStateByThingIdAndUserId(@Param("updatedState")Integer updatedState,@Param("thingId")Integer thingId,@Param("userId")Integer userId);
+
+
+    List<Integer> selectThingIdByState(@Param("state") Integer state);
 }

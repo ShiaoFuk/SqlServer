@@ -6,14 +6,14 @@
     <!--@Table complaint-->
     <id column="id" property="id" />
     <result column="user_id" property="userId" />
-    <result column="form_id" property="formId" />
+    <result column="thing_id" property="thingId" />
     <result column="type" property="type" />
     <result column="reason" property="reason" />
     <result column="state" property="state" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, user_id, form_id, `type`, reason, `state`
+    id, user_id, thing_id, `type`, reason, `state`
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -29,8 +29,8 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.Complaint" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into complaint (user_id, form_id, `type`, reason, `state`)
-    values (#{userId}, #{formId}, #{type}, #{reason}, #{state})
+    insert into complaint (user_id, thing_id, `type`, reason, `state`)
+    values (#{userId}, #{thingId}, #{type}, #{reason}, #{state})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shiaofuk.sqlserver.model.Complaint" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -39,8 +39,8 @@
       <if test="userId != null">
         user_id,
       </if>
-      <if test="formId != null">
-        form_id,
+      <if test="thingId != null">
+        thing_id,
       </if>
       <if test="type != null">
         `type`,
@@ -56,8 +56,8 @@
       <if test="userId != null">
         #{userId},
       </if>
-      <if test="formId != null">
-        #{formId},
+      <if test="thingId != null">
+        #{thingId},
       </if>
       <if test="type != null">
         #{type},
@@ -77,8 +77,8 @@
       <if test="userId != null">
         user_id = #{userId},
       </if>
-      <if test="formId != null">
-        form_id = #{formId},
+      <if test="thingId != null">
+        thing_id = #{thingId},
       </if>
       <if test="type != null">
         `type` = #{type},
@@ -96,7 +96,7 @@
     <!--@mbg.generated-->
     update complaint
     set user_id = #{userId},
-      form_id = #{formId},
+      thing_id = #{thingId},
       `type` = #{type},
       reason = #{reason},
       `state` = #{state}

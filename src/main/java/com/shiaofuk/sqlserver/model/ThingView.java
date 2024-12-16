@@ -1,5 +1,6 @@
 package com.shiaofuk.sqlserver.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -24,5 +25,6 @@ public class ThingView {
     private String place;
 
     @NotNull(message = "不能为null")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")  // 指定日期格式
     private Date time;
 }

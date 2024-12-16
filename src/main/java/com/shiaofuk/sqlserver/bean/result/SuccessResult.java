@@ -11,6 +11,7 @@ public class SuccessResult<T> extends Result<T> {
 
     public SuccessResult(T data) {
         this();
+        this.data = data;
     }
 
     public SuccessResult(String message, T data) {

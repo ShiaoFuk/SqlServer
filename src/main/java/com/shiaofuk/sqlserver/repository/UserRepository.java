@@ -1,14 +1,12 @@
 package com.shiaofuk.sqlserver.repository;
 
-import com.shiaofuk.sqlserver.dto.User.LoginUser;
+import com.shiaofuk.sqlserver.dto.user.LoginUser;
+import com.shiaofuk.sqlserver.dto.user.UserInfo;
 import com.shiaofuk.sqlserver.mapper.UserMapper;
 import com.shiaofuk.sqlserver.model.User;
 import com.shiaofuk.sqlserver.utils.Argon2PasswordHasher;
-import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.sql.SQLIntegrityConstraintViolationException;
 
 
 @Repository
@@ -50,4 +48,19 @@ public class UserRepository {
         userMapper.insertSelective(user);
         return user.getId();
     }
+
+
+    public boolean updateUserInfo(UserInfo userInfo, int id) {
+        User user = new User();
+        user.setId(id);
+        user.setCertificateNumber(userInfo.getCertificateNumber());
+        user.setEmail(userInfo.getEmail());
+        // 更新成功
+        if (userMapper.updateByPrimaryKeySelective(user) > 0) {
+            return true;
+        }
+        return false;
+    }
+
+
 }

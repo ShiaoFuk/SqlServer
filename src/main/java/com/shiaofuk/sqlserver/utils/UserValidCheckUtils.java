@@ -1,7 +1,7 @@
 package com.shiaofuk.sqlserver.utils;
 
 
-import com.shiaofuk.sqlserver.dto.User.LoginUser;
+import com.shiaofuk.sqlserver.dto.user.LoginUser;
 
 /**
  * 检查用户的账号密码是否合法，主要用于注册的时候验证

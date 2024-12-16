@@ -9,11 +9,14 @@ import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.SQLSyntaxErrorException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -56,7 +59,7 @@ public class GlobalExceptionHandler {
     }
 
 
-    // 处理业务特定的异常
+    // 参数异常
     @ExceptionHandler(value = IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Result<Void> handleIllegalArgumentException(IllegalArgumentException e) {
@@ -64,5 +67,38 @@ public class GlobalExceptionHandler {
         logMapper.insertSelective(log);
         System.out.println(e.getClass().getName());
         return new ErrorResult<>("参数异常");
+    }
+
+
+
+    // 请求参数校验失败
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Result<Void> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+        Log log = new Log(e.getClass().getName(), e.toString());
+        logMapper.insertSelective(log);
+        System.out.println(e.getClass().getName());
+        return new ErrorResult<>("请求参数校验失败");
+    }
+
+
+    // 请求参数异常
+    @ExceptionHandler(value = HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Result<Void> handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
+        Log log = new Log(e.getClass().getName(), e.toString());
+        logMapper.insertSelective(log);
+        System.out.println(e.getClass().getName());
+        return new ErrorResult<>("请求参数异常");
+    }
+
+    // 数据库异常
+    @ExceptionHandler(value = SQLSyntaxErrorException.class)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Result<Void> handleSQLSyntaxErrorException(SQLSyntaxErrorException e) {
+        Log log = new Log(e.getClass().getName(), e.toString());
+        logMapper.insertSelective(log);
+        System.out.println(e.getClass().getName());
+        return new ErrorResult<>("数据库异常");
     }
 }

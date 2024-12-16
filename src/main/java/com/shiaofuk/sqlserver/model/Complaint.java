@@ -17,7 +17,7 @@ public class Complaint {
     private Integer userId;
 
     @NotNull(message = "不能为null")
-    private Integer formId;
+    private Integer thingId;
 
     @NotNull(message = "不能为null")
     private Integer type;
