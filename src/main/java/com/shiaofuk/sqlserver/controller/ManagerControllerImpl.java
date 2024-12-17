@@ -56,10 +56,9 @@ public class ManagerControllerImpl implements ManagerController {
             return false;
         }
         // 判断用户权限是否高于
-
         User updateUser = new User();
         updateUser.setId(userId);
-        updateUser.setState(permission.getVal());
+        updateUser.setPermission(permission.getVal());
         return userMapper.updateByPrimaryKeySelective(updateUser) > 0;
     }
 

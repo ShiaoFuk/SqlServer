@@ -101,8 +101,10 @@ public class UserController {
             return new ErrorResult<>();
         }
         List<User> userList = userMapper.selectAllByPermission(requestBody.getData().getVal());
-        if (userList == null || userList.isEmpty()) {
+        if (userList == null) {
             return new ErrorResult<>();
+        } else if (userList.isEmpty()) {
+            return new ErrorResult<>("当前没有此类型成员");
         }
         return new SuccessResult<>(userList);
     }
