@@ -1,19 +1,27 @@
 package com.shiaofuk.sqlserver.controller;
 
+import com.shiaofuk.sqlserver.bean.UserPermission;
 import com.shiaofuk.sqlserver.bean.result.ErrorResult;
 import com.shiaofuk.sqlserver.bean.result.Result;
 import com.shiaofuk.sqlserver.bean.result.SuccessResult;
+import com.shiaofuk.sqlserver.dto.MyRequestBody;
 import com.shiaofuk.sqlserver.dto.user.LoginUser;
 import com.shiaofuk.sqlserver.dto.user.UserInfo;
+import com.shiaofuk.sqlserver.mapper.UserMapper;
+import com.shiaofuk.sqlserver.model.User;
 import com.shiaofuk.sqlserver.service.user.UserServiceRes;
 import com.shiaofuk.sqlserver.service.user.LoginState;
 import com.shiaofuk.sqlserver.service.user.UserService;
+import com.shiaofuk.sqlserver.utils.JwtUtil;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 /**
@@ -22,11 +30,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 @RestController
 public class UserController {
+    private final JwtUtil jwtUtil;
     UserService userService;
-
+    UserMapper userMapper;
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, JwtUtil jwtUtil, UserMapper userMapper) {
         this.userService = userService;
+        this.jwtUtil = jwtUtil;
+        this.userMapper = userMapper;
     }
 
 
@@ -73,5 +84,42 @@ public class UserController {
         }
         return new ErrorResult<>(res.getMessage(), res.getData());
     }
+
+
+    /**
+     * 获取所有用户
+     * @param requestBody 传入权限
+     */
+    @PostMapping("/getUser")
+    public Result<List<User>> getUser(@Valid@RequestBody MyRequestBody<UserPermission> requestBody) {
+        Integer userId = jwtUtil.verifyToken(requestBody.getToken());
+        if (userId == null) {
+            return new ErrorResult<>();
+        }
+        User user = userMapper.selectByPrimaryKey(userId);
+        if (user == null || user.getPermission() < UserPermission.ROOT.getVal()) {
+            return new ErrorResult<>();
+        }
+        List<User> userList = userMapper.selectAllByPermission(requestBody.getData().getVal());
+        if (userList == null || userList.isEmpty()) {
+            return new ErrorResult<>();
+        }
+        return new SuccessResult<>(userList);
+    }
+
+    @PostMapping("/getUserInfo")
+    public Result<User> getUseInfo(@NotBlank@RequestBody String token) {
+        Integer userId = jwtUtil.verifyToken(token);
+        if (userId == null) {
+            return new ErrorResult<>();
+        }
+        User user = userMapper.selectByPrimaryKey(userId);
+        if (user == null) {
+            return new ErrorResult<>();
+        }
+        user.setPassword(null);
+        return new SuccessResult<>(user);
+    }
+
 
 }

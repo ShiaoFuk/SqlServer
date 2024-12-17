@@ -1,4 +1,5 @@
 package com.shiaofuk.sqlserver.mapper;
+import java.util.List;
 
 import com.shiaofuk.sqlserver.model.User;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,6 +21,8 @@ public interface UserMapper {
 
 
     User selectOneIdAndPasswordByUsername(@Param("username")String username);
+
+    List<User> selectAllByPermission(@Param("permission")Integer permission);
 
 
 }
