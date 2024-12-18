@@ -24,4 +24,7 @@ public interface LostThingMapper {
 
 
     List<Integer> selectThingIdByState(@Param("state") Integer state);
+
+    List<Integer> selectIdByUserIdAndState(@Param("userId")Integer userId,@Param("state")Integer state);
+
 }

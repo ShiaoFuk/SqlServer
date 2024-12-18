@@ -25,6 +25,8 @@ public interface FoundThingMapper {
 
     FoundThing selectFirstByThingIdAndState(@Param("thingId")Integer thingId,@Param("state")Integer state);
 
+    List<Integer> selectIdByUserIdAndState(@Param("userId")Integer userId,@Param("state")Integer state);
+
 
 
     List<Integer> selectThingIdByState(@Param("state") Integer state);
